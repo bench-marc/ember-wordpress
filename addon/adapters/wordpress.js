@@ -22,9 +22,19 @@ export default DS.RESTAdapter.extend({
 				totalPages: getHeader(headers, 'X-WP-TotalPages')
 			};
 			payload.meta = meta;
-		}
-		return this._super(status, headers, payload, requestData);
-	},
+    }
+
+    if (this.isInvalid(status, headers, payload)) {
+      payload.errors = [payload];
+    }
+
+    return this._super(status, headers, payload, requestData);
+
+  },
+
+  isInvalid(status) {
+    return status === 422 || status === 400;
+  },
 
   pathForType: function(modelName) {
     modelName = modelName.replace('wordpress/', '');
