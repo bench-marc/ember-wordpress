@@ -7,6 +7,16 @@ export default DS.RESTAdapter.extend({
   // Where your Wordpress installation is.
 	host: config.emberWordpress.host,
 
+  /**
+   * this setter is necessary to mute that 'computed-property-override'-deprecation warning, that is triggered by fastboot.
+   * See https://emberjs.com/deprecations/v3.x#toc_computed-property-override for more details.
+   */
+  fastboot: computed({
+    set(key, value) {
+      return value;
+    }
+  }),
+
   // Whether to send many requests or to one-big request.
 	coalesceFindRequests: config.emberWordpress.coalesceFindRequests || false,
 
