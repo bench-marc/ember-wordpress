@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 import config from 'ember-get-config';
 import getHeader from '../utils/get-header';
+import { computed } from '@ember/object';
 
 // The WP API requires a rest adapter.
 export default DS.RESTAdapter.extend({
